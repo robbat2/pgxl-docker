@@ -1,3 +1,4 @@
+#!/usr/bin/python
 __author__ = 'matthieu'
 
 import argparse
@@ -197,6 +198,8 @@ listen PGSQL 0.0.0.0:5432
     return conf
 
 if args.ip:
+    from docker import Client
+    dcl = Client()
     print get_containers(dcl)
 
 if args.conf:
@@ -205,13 +208,12 @@ if args.conf:
     if args.local > 0:
         ips = ["127.0.0.1"] * args.local
         local_mode = True
-	gtmproxy = False
+        gtmproxy = False
     elif args.static == None:
-	   from docker import Client
-
-	   dcl = Client()
-	   ctn = get_containers(dcl)
-	   ips = [c["ip"] for c in ctn]
+        from docker import Client
+        dcl = Client()
+        ctn = get_containers(dcl)
+        ips = [c["ip"] for c in ctn]
     else:
         ips = args.static.split(",")
     conf = get_conf(ips, local_mode, gtmproxy)
