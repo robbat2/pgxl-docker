@@ -23,12 +23,18 @@ RUN apt-get install -y pgxnclient
 
 ### LOCALE
 
-#RUN apt-get install -y locales
-#        && localedef -i fr_FR -c -f UTF-8 -A /usr/share/locale/locale.alias fr_FR.UTF-8
-#RUN locale-gen fr_FR.UTF-8
-#ENV LANG fr_FR.UTF-8
+RUN apt-get install -y locales
+RUN localedef -i fr_FR -c -f UTF-8 -A /usr/share/locale/locale.alias fr_FR.UTF-8
+RUN locale-gen fr_FR.UTF-8
+RUN localedef -i fi_FI -c -f UTF-8 -A /usr/share/locale/locale.alias fi_FI.UTF-8
+RUN locale-gen fi_FI.UTF-8
+
+ENV LANG C.UTF-8
+ENV LC_ALL C.UTF-8
+
 #ENV LANGUAGE fr_FR:fr
 #ENV LC_ALL fr_FR.UTF-8
+#ENV LANG fr_FR.UTF-8
 
 ### PGXL
 
