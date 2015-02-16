@@ -24,17 +24,27 @@ RUN apt-get install -y pgxnclient
 ### LOCALE
 
 RUN apt-get install -y locales
+# Default
+RUN localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+RUN locale-gen en_US.UTF-8
+# French
 RUN localedef -i fr_FR -c -f UTF-8 -A /usr/share/locale/locale.alias fr_FR.UTF-8
 RUN locale-gen fr_FR.UTF-8
+# Finnish
 RUN localedef -i fi_FI -c -f UTF-8 -A /usr/share/locale/locale.alias fi_FI.UTF-8
 RUN locale-gen fi_FI.UTF-8
 
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
+ENV LANGUAGE en_US:en
+ENV LANG en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
 
 #ENV LANGUAGE fr_FR:fr
 #ENV LC_ALL fr_FR.UTF-8
 #ENV LANG fr_FR.UTF-8
+
+#ENV LANGUAGE fi_FI:fi
+#ENV LC_ALL fi_FI.UTF-8
+#ENV LANG fi_FI.UTF-8
 
 ### PGXL
 
@@ -70,6 +80,7 @@ RUN ldconfig
 
 RUN mkdir -p /var/log/supervisor
 COPY etc/supervisor/conf.d/supervisor.conf /etc/supervisor/conf.d/
+#COPY etc/supervisor/conf.d/pgxl.conf /etc/supervisor/conf.d/ # Does not work
 COPY etc/sysctl.conf /etc/sysctl.conf
 COPY etc/environment /etc/environment
 
