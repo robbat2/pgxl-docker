@@ -189,7 +189,7 @@ listen stats 0.0.0.0:9000
 
 listen PGSQL
     bind 0.0.0.0:5432
-    bind ::5432
+    bind :::5432
     mode tcp
     option tcplog
     balance static-rr
