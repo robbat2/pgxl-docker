@@ -53,9 +53,9 @@ RUN git clone https://github.com/postmind-net/postgres-xl.git pgxl --depth 1
 WORKDIR /root/pgxl
 RUN ./configure --with-python --prefix /opt/pgxl --with-openssl --with-libxml --with-libxslt --with-zlib --with-perl --enable-nls
 # ./configure --enable-cassert --enable-debug CFLAGS="-ggdb -Og -fno-omit-frame-pointer" --with-python --prefix /opt/pgxl
-RUN make -j 4
+RUN make -j -l 4
 WORKDIR /root/pgxl/contrib
-RUN make -j 4
+RUN make -j -l 4
 WORKDIR /root/pgxl
 RUN make install
 WORKDIR /root/pgxl/contrib
