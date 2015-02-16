@@ -195,7 +195,7 @@ listen PGSQL
     balance static-rr
 """)
 
-    for i in range(1, len(ips)):
+    for i in range(0, len(ips)):
         conf.write("""    server s%d %s:5432 check\n""" %(i, ips[i]))
     return conf
 
