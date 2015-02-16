@@ -187,7 +187,8 @@ listen stats 0.0.0.0:9000
     mode http
     stats uri /stats
 
-listen PGSQL 0.0.0.0:5432
+listen PGSQL
+    bind 0.0.0.0:5432
     mode tcp
     option tcplog
     balance static-rr
